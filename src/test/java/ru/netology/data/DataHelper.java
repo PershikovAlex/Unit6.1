@@ -16,6 +16,14 @@ public class DataHelper {
         return new VerificationCode("12345");
     }
 
+    public static CardInfo firstCardInfo() {
+        return new CardInfo("5559 0000 0000 0001");
+    }
+
+    public static CardInfo secondCardInfo() {
+        return new CardInfo("5559 0000 0000 0002");
+    }
+
     @Value
     public static class AuthInfo {
         private String login;
@@ -25,5 +33,10 @@ public class DataHelper {
     @Value
     public static class VerificationCode {
         String code;
+    }
+
+    @Value
+    public static class CardInfo {
+        String numberCard;
     }
 }
