@@ -4,12 +4,14 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
+import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
+import ru.netology.page.TransferPage;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TransferMoneyTest {
+    DashboardPage dashboardPage;
     @BeforeEach
     void setUp() {
         Configuration.holdBrowserOpen = true;
@@ -18,7 +20,8 @@ public class TransferMoneyTest {
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        var dashboardPage = verificationPage.validVerify(verificationCode);
+        dashboardPage = verificationPage.validVerify(verificationCode);
+
     }
     @Test
     void shouldTest() {
