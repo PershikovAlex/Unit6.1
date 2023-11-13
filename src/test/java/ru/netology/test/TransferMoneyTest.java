@@ -72,4 +72,26 @@ public class TransferMoneyTest {
         assertEquals(firstCardBalance, actualBalanceFirstCard);
         assertEquals(secondCardBalance, actualBalanceSecondCard);
     }
+
+    @Test
+    void errorMessageTransfer1to1Test() {
+        var firstCardInfo = DataHelper.getFirstCardInfo();
+        var firstCardBalance = dashboardPage.getFirstCardBalance();
+        var amount = DataHelper.generateValidAmount(firstCardBalance);
+        var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
+        transferPage.findErrorMassage("Выберите другую карту");
+    }
+
+    @Test
+    void errorMessageIfAmountZeroTest() {
+        var firstCardInfo = DataHelper.getFirstCardInfo();
+        var secondCardInfo = DataHelper.getSecondCardInfo();
+        var firstCardBalance = dashboardPage.getFirstCardBalance();
+        var secondCardBalance = dashboardPage.getSecondCardBalance();
+        var amount = 0;
+        var transferPage = dashboardPage.selectCardToTransfer(secondCardInfo);
+        dashboardPage = transferPage.makeValidTransfer(String.valueOf(amount), firstCardInfo);
+        transferPage.findErrorMassage("Введите сумму больше 0");
+    }
 }
